@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work | DHARUN Portfolio</title>
+  <meta name="description" content="Dharun's projects: AlgoMart — an online shopping app showcasing sorting algorithms, plus upcoming distributed systems and OS projects." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <style>
+    /* ── Page-specific: Work ──────────────────────────────── */
+    .page-header {
+      padding-top: 128px;
+      padding-bottom: var(--space-lg);
+    }
+
+    .page-header h1 { margin-bottom: var(--space-xs); }
+
+    .page-header p {
+      color: var(--on-surface-variant);
+      max-width: 640px;
+    }
+
+    /* Featured project layout */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 7fr 5fr;
+      gap: var(--space-md);
+      align-items: stretch;
+      margin-bottom: var(--space-xl);
+    }
+
+    .featured-card {
+      background: var(--surface-container-lowest);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow var(--transition-base), transform var(--transition-base);
+    }
+
+    .featured-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-5px);
+    }
+
+    .featured-card__img {
+      height: 360px;
+      position: relative;
+      background: var(--surface-container-high);
+      overflow: hidden;
+    }
+
+    .featured-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(30%) mix-blend-multiply;
+      opacity: 0.85;
+      transition: transform 0.6s ease, opacity 0.4s ease;
+    }
+
+    .featured-card:hover .featured-card__img img {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+
+    .featured-card__img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--surface-container-lowest) 0%, transparent 40%);
+    }
+
+    .featured-card__body {
+      padding: var(--space-md);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .featured-card__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-sm);
+    }
+
+    .tag {
+      font-size: var(--fs-label-caps);
+      letter-spacing: var(--ls-label-caps);
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 4px 12px;
+      background: rgba(0,104,95,0.1);
+      color: var(--primary);
+      border-radius: var(--radius-full);
+    }
+
+    .featured-card__title {
+      font-size: var(--fs-headline-lg);
+      font-weight: 600;
+      color: var(--on-surface);
+      line-height: 1.3;
+      margin-bottom: var(--space-xs);
+    }
+
+    .featured-card__desc {
+      font-size: var(--fs-body-md);
+      color: var(--on-surface-variant);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: var(--space-md);
+    }
+
+    .featured-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+
+    .featured-card__meta {
+      font-size: var(--fs-label-caps);
+      letter-spacing: var(--ls-label-caps);
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+      opacity: 0.6;
+    }
+
+    /* Info sidebar cards */
+    .info-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .info-card {
+      flex: 1;
+      background: var(--surface-container);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .info-card .material-symbols-outlined {
+      font-size: 48px;
+      color: var(--primary);
+      margin-bottom: var(--space-sm);
+    }
+
+    .info-card h3 {
+      font-size: var(--fs-headline-md);
+      color: var(--on-surface);
+      margin-bottom: var(--space-xs);
+    }
+
+    .info-card p {
+      font-size: var(--fs-body-md);
+      color: var(--on-surface-variant);
+    }
+
+    /* Code snippet card */
+    .code-snippet-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .code-snippet-card__label {
+      font-size: var(--fs-label-caps);
+      letter-spacing: var(--ls-label-caps);
+      text-transform: uppercase;
+      color: var(--inverse-on-surface);
+      opacity: 0.65;
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Section divider with label */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .section-header h2 {
+      font-size: var(--fs-headline-md);
+      color: var(--on-surface);
+      white-space: nowrap;
+    }
+
+    .section-header__line {
+      flex: 1;
+      height: 1px;
+      background: var(--outline-variant);
+    }
+
+    /* Future builds grid */
+    .future-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+
+    .future-card {
+      border: 1.5px dashed var(--outline-variant);
+      border-radius: var(--radius-lg);
+      background: var(--surface-container-low);
+      opacity: 0.65;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      text-align: center;
+      padding: var(--space-md);
+      gap: var(--space-xs);
+    }
+
+    .future-card .material-symbols-outlined {
+      font-size: 32px;
+      color: var(--secondary);
+    }
+
+    .future-card__status {
+      font-size: var(--fs-label-caps);
+      letter-spacing: var(--ls-label-caps);
+      text-transform: uppercase;
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    .future-card__title {
+      font-size: var(--fs-body-md);
+      color: var(--on-surface-variant);
+    }
+
+    @media (max-width: 900px) {
+      .featured-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-card__img { height: 260px; }
+    }
+
+    @media (max-width: 600px) {
+      .future-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Cursor Glow ─────────────────────────────────────────── -->
+<div id="cursor-glow"></div>
+
+<!-- ── Navigation ─────────────────────────────────────────── -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner container">
+    <a href="index.html" class="nav__brand">DHARUN</a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="work.html" class="active">Work</a></li>
+      <li><a href="user.html">About</a></li>
+    </ul>
+
+    <a href="user.html#contact" class="nav__cta">Contact</a>
+
+    <button class="nav__burger" id="nav-burger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav__mobile" id="nav-mobile">
+  <a href="index.html">Home</a>
+  <a href="work.html" class="active">Work</a>
+  <a href="user.html">About</a>
+  <a href="user.html#contact">Contact</a>
+</div>
+
+<!-- ── Main Content ───────────────────────────────────────── -->
+<main>
+
+  <!-- Page Header -->
+  <header class="page-header container fade-up">
+    <h1 class="text-display">My Work</h1>
+    <p class="text-body-lg">
+      A collection of technical explorations, academic projects, and engineering
+      challenges I've tackled.
+    </p>
+  </header>
+
+  <!-- Featured Project -->
+  <section class="container fade-up" aria-label="Featured project" style="margin-bottom: var(--space-xl);">
+    <div class="featured-grid">
+
+      <!-- Main card -->
+      <article class="featured-card">
+        <div class="featured-card__img">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIda0FJnDgyPSguhNxDbBmwHdPtoeat-dsySc6V7cf8i7_b-hnFv-1fTHAEJeyw81gbAL83fi50IbYNDsLi06v-pOD30YDjH45Qsy7MiOOlEkAWwXNU_ZqH91KD4fwHasPiKJJrw3t9-qydaLvI5HDR-neo9wtTQ0pozMfG8m2wDAib2xsT_tI48tRY7o3yCtEyos0Z19ZbNjSq1lZijZ9E0oce_8nGxvfBczRJPfPTyATCy5TFn6rxpCYZ_XEkXCJ5bKblcvPpCXI"
+            alt="Code displayed on engineering workstation"
+          />
+        </div>
+        <div class="featured-card__body">
+          <div class="featured-card__tags">
+            <span class="tag">Java</span>
+            <span class="tag">C++</span>
+            <span class="tag">DSA</span>
+            <span class="tag">Sorting Algorithms</span>
+          </div>
+          <h2 class="featured-card__title">AlgoMart – Online Shopping App with Sorting Algorithms</h2>
+          <p class="featured-card__desc">
+            A team project built with 2 friends for our Data Structures &amp; Algorithms coursework.
+            It's an online shopping application that demonstrates multiple sorting techniques
+            (quick sort, merge sort, and bubble sort) to sort and display products by price,
+            rating, and name.
+          </p>
+          <div class="featured-card__footer">
+            <a
+              href="https://github.com/ddharun-rgrt"
+              target="_blank"
+              rel="noopener"
+              class="btn btn--primary"
+              style="padding: var(--space-xs) var(--space-md); font-size: var(--fs-label-caps); letter-spacing: var(--ls-label-caps);"
+            >
+              View Code on GitHub
+              <span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span>
+            </a>
+            <span class="featured-card__meta">Team Project</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Info sidebar -->
+      <div class="info-stack">
+
+        <!-- Algorithmic info card -->
+        <div class="info-card fade-up">
+          <span class="material-symbols-outlined">code_blocks</span>
+          <h3>Algorithmic Foundation</h3>
+          <p>Focusing on Big-O complexity and efficient memory management in real-world application contexts.</p>
+        </div>
+
+        <!-- Code snippet card -->
+        <div class="code-block code-snippet-card fade-up">
+          <p class="code-snippet-card__label" style="font-size:var(--fs-label-caps);letter-spacing:var(--ls-label-caps);text-transform:uppercase;color:rgba(240,241,242,0.6);margin-bottom:var(--space-sm);">Current Focus</p>
+          <div style="font-family:var(--font-code); font-size: var(--fs-code); line-height:1.7; color: var(--inverse-on-surface);">
+            <span class="kw">const</span> status = <span class="kw">"Learning"</span>;<br/>
+            <span class="kw">const</span> goal &nbsp;= <span class="kw">"Production-grade systems"</span>;<br/>
+            console.log(<span class="kw">"More projects coming soon..."</span>);
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Future Builds -->
+  <section class="container fade-up" aria-label="Upcoming projects">
+    <div class="section-header">
+      <h2>Future Builds</h2>
+      <div class="section-header__line"></div>
+    </div>
+
+    <div class="future-grid">
+      <div class="future-card">
+        <span class="material-symbols-outlined">hourglass_empty</span>
+        <p class="future-card__status">In Development</p>
+        <p class="future-card__title">Distributed Systems Project</p>
+      </div>
+      <div class="future-card">
+        <span class="material-symbols-outlined">terminal</span>
+        <p class="future-card__status">Concept Phase</p>
+        <p class="future-card__title">Custom OS Kernel Study</p>
+      </div>
+      <div class="future-card">
+        <span class="material-symbols-outlined">psychology</span>
+        <p class="future-card__status">Upcoming</p>
+        <p class="future-card__title">Neural Network Implementation</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer__inner container">
+    <div>
+      <div class="footer__brand">DHARUN</div>
+      <p class="footer__copy">More projects coming soon &mdash; currently learning and building!</p>
+      <p class="footer__copy" style="margin-top:4px;">&copy; 2024 Dharun &middot; Built with precision</p>
+    </div>
+    <nav class="footer__links" aria-label="Footer links">
+      <a href="mailto:ddharun246@gmail.com">Email</a>
+      <a href="https://github.com/ddharun-rgrt" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/dharun-c-a1a8352ab/" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

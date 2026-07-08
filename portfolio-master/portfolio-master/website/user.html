@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | DHARUN – Software Engineering Profile</title>
+  <meta name="description" content="Learn about Dharun — Integrated M.Tech Software Engineering student at VIT, skills, education, experience, and contact." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <style>
+    /* ── Page-specific: User / About ──────────────────────── */
+    .profile-page {
+      padding-top: 112px;
+      padding-bottom: var(--space-xl);
+    }
+
+    /* Bento grid */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--space-md);
+    }
+
+    /* Span helpers */
+    .span-12 { grid-column: span 12; }
+    .span-8  { grid-column: span 8;  }
+    .span-7  { grid-column: span 7;  }
+    .span-6  { grid-column: span 6;  }
+    .span-5  { grid-column: span 5;  }
+    .span-4  { grid-column: span 4;  }
+
+    /* Profile header card */
+    .profile-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .profile-card__avatar {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      flex-shrink: 0;
+    }
+
+    .profile-card__avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(0,104,95,0.15);
+    }
+
+    .profile-card__badge {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
+      border-radius: 50%;
+      border: 3px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-card__badge .material-symbols-outlined {
+      font-size: 13px;
+      color: #fff;
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .profile-card__info h1 {
+      font-size: var(--fs-display);
+      font-weight: 700;
+      letter-spacing: var(--ls-display);
+      color: var(--on-surface);
+      line-height: 1;
+    }
+
+    .profile-card__info .role {
+      font-size: var(--fs-headline-md);
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 6px;
+    }
+
+    .profile-card__badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-sm);
+    }
+
+    /* Connect sidebar */
+    .connect-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--space-sm);
+    }
+
+    .connect-card__label {
+      font-size: var(--fs-label-caps);
+      letter-spacing: var(--ls-label-caps);
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 4px;
+    }
+
+    .connect-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      color: var(--on-surface);
+      transition: color var(--transition-fast);
+    }
+
+    .connect-link:hover { color: var(--primary); }
+
+    .connect-link__icon {
+      padding: 8px;
+      background: var(--surface-container);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .connect-link:hover .connect-link__icon {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* About me section */
+    .about-section .section-icon {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .about-section .section-icon .material-symbols-outlined { color: var(--primary); }
+
+    .about-section p {
+      font-size: var(--fs-body-lg);
+      color: var(--secondary);
+      line-height: 1.75;
+    }
+
+    .about-section p .highlight {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Edu / Exp mini cards */
+    .meta-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .meta-item {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: var(--space-md);
+      flex: 1;
+    }
+
+    .meta-item__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xs);
+    }
+
+    .meta-item__header .material-symbols-outlined { color: var(--primary); }
+
+    .meta-item__label {
+      font-size: var(--fs-label-caps);
+      letter-spacing: var(--ls-label-caps);
+      text-transform: uppercase;
+      color: var(--secondary);
+    }
+
+    .meta-item__title {
+      font-size: var(--fs-headline-md);
+      color: var(--on-surface);
+    }
+
+    .meta-item__sub {
+      font-size: var(--fs-body-md);
+      color: var(--secondary);
+      margin-top: 4px;
+    }
+
+    /* Skills progress */
+    .skills-section { }
+
+    .skill-row { margin-bottom: var(--space-sm); }
+
+    .skill-row:last-child { margin-bottom: 0; }
+
+    .skill-label-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--space-base);
+    }
+
+    .skill-name {
+      font-size: var(--fs-label-caps);
+      letter-spacing: var(--ls-label-caps);
+      text-transform: uppercase;
+      color: var(--on-surface);
+    }
+
+    .skill-pct {
+      font-size: var(--fs-label-caps);
+      letter-spacing: var(--ls-label-caps);
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    /* Certifications placeholder */
+    .cert-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cert-card__glow {
+      position: absolute;
+      top: -32px;
+      right: -32px;
+      width: 128px;
+      height: 128px;
+      background: rgba(0,104,95,0.06);
+      border-radius: 50%;
+      filter: blur(20px);
+      pointer-events: none;
+      transition: background var(--transition-base);
+    }
+
+    .cert-card:hover .cert-card__glow { background: rgba(0,104,95,0.12); }
+
+    .cert-placeholder {
+      border: 2px dashed var(--outline-variant);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+      text-align: center;
+    }
+
+    .cert-placeholder .material-symbols-outlined { color: var(--outline); }
+
+    /* Contact form */
+    .contact-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    .contact-cta__icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(0,104,95,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: var(--space-md);
+    }
+
+    .contact-cta__icon .material-symbols-outlined { color: var(--primary); font-size: 28px; }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .span-8  { grid-column: span 12; }
+      .span-7  { grid-column: span 12; }
+      .span-6  { grid-column: span 12; }
+      .span-5  { grid-column: span 12; }
+      .span-4  { grid-column: span 12; }
+
+      .profile-card { flex-direction: column; text-align: center; }
+      .profile-card__badges { justify-content: center; }
+      .profile-card__avatar { width: 120px; height: 120px; }
+      .profile-card__info h1 { font-size: var(--fs-display-mob); }
+
+      .contact-section { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .meta-card { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Cursor Glow ─────────────────────────────────────────── -->
+<div id="cursor-glow"></div>
+
+<!-- ── Navigation ─────────────────────────────────────────── -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner container">
+    <a href="index.html" class="nav__brand">DHARUN</a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="user.html" class="active">About</a></li>
+    </ul>
+
+    <a href="#contact" class="nav__cta">Contact</a>
+
+    <button class="nav__burger" id="nav-burger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav__mobile" id="nav-mobile">
+  <a href="index.html">Home</a>
+  <a href="work.html">Work</a>
+  <a href="user.html" class="active">About</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- ── Main Content ───────────────────────────────────────── -->
+<main class="profile-page container">
+  <div class="bento-grid">
+
+    <!-- ── 1. Profile Header ────────────────────────────── -->
+    <section class="span-8 glass-card profile-card fade-up" style="padding: var(--space-md);">
+      <div class="profile-card__avatar">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHl8BFo8sOPaOP9a26BiaiRC6aJIBb_1Y0uJrkxdCMSP33a9ObkJYhMlS9K1NeL325QBPcg-nGfAUksAkKvD4ToimNE6RQjP5ef6GUi1GRGa9jKD1hy4-WvQ9cXhGRmSxCyymQysLJleHCRAUEj99JoQW_Fmw_pn_fiCmaWmPzVuOpXv3K-Cn8GaaLuuuYVQA6p8wNN9KHZA8--kQNb8KnkdDduYUfgtSnm7RiZJ7XZ_l7QXc8nO0vrM722gSVIrAfsLLT5j1CJfiK"
+          alt="Dharun – Software Engineering student profile photo"
+        />
+        <div class="profile-card__badge" title="Verified student">
+          <span class="material-symbols-outlined">verified</span>
+        </div>
+      </div>
+      <div class="profile-card__info">
+        <h1>DHARUN</h1>
+        <p class="role">Software Engineering Student &amp; Intern</p>
+        <div class="profile-card__badges">
+          <span class="chip chip--pill">Integrated M.Tech</span>
+          <span class="chip chip--pill chip--secondary">Emdeon Intern</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 2. Connect / Contact Links ───────────────────── -->
+    <aside class="span-4 glass-card connect-card fade-up" style="padding: var(--space-md);">
+      <p class="connect-card__label">Connect</p>
+
+      <a href="mailto:ddharun246@gmail.com" class="connect-link">
+        <span class="connect-link__icon">
+          <span class="material-symbols-outlined">mail</span>
+        </span>
+        <span style="font-size:var(--fs-body-md);">ddharun246@gmail.com</span>
+      </a>
+
+      <a href="https://www.linkedin.com/in/dharun-c-a1a8352ab/" target="_blank" rel="noopener" class="connect-link">
+        <span class="connect-link__icon">
+          <span class="material-symbols-outlined">link</span>
+        </span>
+        <span style="font-size:var(--fs-body-md);">LinkedIn Profile</span>
+      </a>
+
+      <a href="https://github.com/ddharun-rgrt" target="_blank" rel="noopener" class="connect-link">
+        <span class="connect-link__icon">
+          <span class="material-symbols-outlined">code</span>
+        </span>
+        <span style="font-size:var(--fs-body-md);">GitHub Repositories</span>
+      </a>
+    </aside>
+
+    <!-- ── 3. About Me ────────────────────────────────── -->
+    <section class="span-7 glass-card about-section fade-up" style="padding: var(--space-md);">
+      <div class="section-icon">
+        <span class="material-symbols-outlined">person</span>
+        <h2 class="text-headline-md">About Me</h2>
+      </div>
+      <p>
+        I'm an Integrated M.Tech Software Engineering student at
+        <span class="highlight">Vellore Institute of Technology</span>,
+        currently interning at <span class="highlight">Emdeon</span>.
+        I have a foundation in Java, Python, SQL, and C/C++, and I'm always looking
+        to learn more and take on new challenges. My focus lies in building scalable,
+        efficient software solutions through clean code and rigorous engineering principles.
+      </p>
+    </section>
+
+    <!-- ── 4. Education & Experience ─────────────────── -->
+    <section class="span-5 fade-up" style="display:flex; flex-direction:column; gap:var(--space-md);">
+
+      <div class="meta-item">
+        <div class="meta-item__header">
+          <span class="material-symbols-outlined">school</span>
+          <span class="meta-item__label">Education</span>
+        </div>
+        <p class="meta-item__title">Integrated M.Tech, Software Engineering</p>
+        <p class="meta-item__sub">Vellore Institute of Technology</p>
+      </div>
+
+      <div class="meta-item">
+        <div class="meta-item__header">
+          <span class="material-symbols-outlined">work</span>
+          <span class="meta-item__label">Experience</span>
+        </div>
+        <p class="meta-item__title">Emdeon</p>
+        <p class="meta-item__sub">Software Engineering Intern (1 Month)</p>
+      </div>
+
+    </section>
+
+    <!-- ── 5. Technical Skills ────────────────────────── -->
+    <section class="span-6 glass-card skills-section fade-up" style="padding: var(--space-md);">
+      <div style="display:flex; align-items:center; gap:var(--space-sm); margin-bottom:var(--space-md);">
+        <span class="material-symbols-outlined" style="color:var(--primary);">terminal</span>
+        <h2 class="text-headline-md">Technical Arsenal</h2>
+      </div>
+
+      <div class="skill-row">
+        <div class="skill-label-row">
+          <span class="skill-name">Java</span>
+          <span class="skill-pct">85%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-bar__fill" data-width="85%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row">
+        <div class="skill-label-row">
+          <span class="skill-name">Python</span>
+          <span class="skill-pct">80%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-bar__fill" data-width="80%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row">
+        <div class="skill-label-row">
+          <span class="skill-name">SQL</span>
+          <span class="skill-pct">75%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-bar__fill" data-width="75%"></div>
+        </div>
+      </div>
+
+      <div class="skill-row">
+        <div class="skill-label-row">
+          <span class="skill-name">C / C++</span>
+          <span class="skill-pct">70%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-bar__fill" data-width="70%"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 6. Certifications ──────────────────────────── -->
+    <section class="span-6 glass-card cert-card fade-up" style="padding: var(--space-md);">
+      <div class="cert-card__glow"></div>
+      <div style="display:flex; align-items:center; gap:var(--space-sm); margin-bottom:var(--space-sm);">
+        <span class="material-symbols-outlined" style="color:var(--primary);">verified_user</span>
+        <h2 class="text-headline-md">Certifications</h2>
+      </div>
+      <div class="cert-placeholder">
+        <span class="material-symbols-outlined">auto_awesome</span>
+        <p style="font-size:var(--fs-body-md); color:var(--secondary); font-style:italic;">
+          "Currently exploring certifications — stay tuned!"
+        </p>
+      </div>
+    </section>
+
+    <!-- ── 7. Contact Form ────────────────────────────── -->
+    <section class="span-12 glass-card fade-up" id="contact" style="padding: var(--space-lg);">
+      <div class="contact-section">
+
+        <!-- Left: CTA copy -->
+        <div>
+          <h2 class="text-display" style="letter-spacing:var(--ls-display); color:var(--on-surface);">
+            Let's Build Something Together
+          </h2>
+          <p class="text-body-lg" style="color:var(--secondary); margin-top:var(--space-sm);">
+            Whether you're looking for a collaborator, a dedicated intern, or just want to
+            chat about software engineering, my inbox is always open.
+          </p>
+          <div style="display:flex; align-items:center; gap:var(--space-md); margin-top:var(--space-md);">
+            <div class="contact-cta__icon">
+              <span class="material-symbols-outlined">rocket_launch</span>
+            </div>
+            <div>
+              <p class="text-label-caps" style="color:var(--on-surface-variant);">Ready for</p>
+              <p class="text-headline-md" style="color:var(--primary);">New Challenges</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="contact-name">Full Name</label>
+            <input
+              id="contact-name"
+              class="form-input"
+              type="text"
+              name="name"
+              placeholder="John Doe"
+              required
+              autocomplete="name"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="contact-email">Email Address</label>
+            <input
+              id="contact-email"
+              class="form-input"
+              type="email"
+              name="email"
+              placeholder="john@example.com"
+              required
+              autocomplete="email"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="contact-msg">Message</label>
+            <textarea
+              id="contact-msg"
+              class="form-textarea"
+              name="message"
+              rows="4"
+              placeholder="Your vision starts here..."
+              required
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="btn btn--primary"
+            style="width:100%; justify-content:center; font-size:var(--fs-label-caps); letter-spacing:var(--ls-label-caps);"
+          >
+            Send Message
+            <span class="material-symbols-outlined" style="font-size:18px;">send</span>
+          </button>
+        </form>
+
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer__inner container">
+    <span class="footer__brand">DHARUN</span>
+    <nav class="footer__links" aria-label="Footer links">
+      <a href="mailto:ddharun246@gmail.com">Email</a>
+      <a href="https://github.com/ddharun-rgrt" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/dharun-c-a1a8352ab/" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+    <p class="footer__copy">&copy; 2024 Dharun &middot; Built with precision</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

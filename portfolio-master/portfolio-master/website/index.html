@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DHARUN | Software Engineering Portfolio</title>
+  <meta name="description" content="Dharun — Integrated M.Tech Software Engineering student at VIT, interning at Emdeon. Explore my projects, skills, and background." />
+
+  <!-- Fonts & Icons (via style.css @import) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <style>
+    /* ── Page-specific: Hero ──────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 96px;
+      padding-bottom: var(--space-xl);
+      overflow: hidden;
+    }
+
+    .hero__bg-accent {
+      position: absolute;
+      top: -60px;
+      right: -80px;
+      width: 600px;
+      height: 600px;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.045;
+    }
+
+    .hero__label {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: var(--fs-label-caps);
+      font-weight: 600;
+      letter-spacing: var(--ls-label-caps);
+      text-transform: uppercase;
+      color: var(--primary);
+      background: rgba(0, 104, 95, 0.1);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius-full);
+      width: fit-content;
+    }
+
+    .hero__name {
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      color: var(--on-surface);
+    }
+
+    .hero__subtitle {
+      font-size: var(--fs-headline-md);
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      max-width: 580px;
+    }
+
+    .hero__divider {
+      width: 96px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: var(--radius-full);
+      margin-top: var(--space-base);
+    }
+
+    .hero__bio {
+      font-size: var(--fs-body-lg);
+      color: var(--secondary);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    .hero__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    .hero__ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+    }
+
+    /* ── Bento Grid ───────────────────────────────────────── */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--gutter);
+      margin-top: var(--space-xl);
+    }
+
+    .bento__main   { grid-column: span 8; }
+    .bento__side   { grid-column: span 4; display: flex; flex-direction: column; gap: var(--gutter); }
+
+    .bento__img-wrap {
+      height: 320px;
+      overflow: hidden;
+      background: var(--surface-dim);
+    }
+
+    .bento__img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .card:hover .bento__img-wrap img { transform: scale(1.05); }
+
+    .bento__content { padding: var(--space-md); }
+
+    .bento__tile {
+      flex: 1;
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .bento__tile--primary {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+
+    .bento__tile--surface {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      color: var(--on-surface);
+    }
+
+    .bento__tile .material-symbols-outlined {
+      font-size: 40px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .bento__tile--primary .material-symbols-outlined { color: var(--on-primary); }
+    .bento__tile--surface  .material-symbols-outlined { color: var(--primary); }
+
+    .bento__tile h4 { font-size: var(--fs-headline-md); font-weight: 600; }
+    .bento__tile p  { font-size: var(--fs-body-md); opacity: 0.85; margin-top: 4px; }
+
+    /* Project title hover */
+    .project-title {
+      font-size: var(--fs-headline-md);
+      font-weight: 600;
+      color: var(--on-surface);
+      transition: color var(--transition-fast);
+    }
+    .card:hover .project-title { color: var(--primary); }
+
+    @media (max-width: 768px) {
+      .bento { grid-template-columns: 1fr; }
+      .bento__main, .bento__side { grid-column: span 1; }
+      .bento__img-wrap { height: 240px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Cursor Glow ─────────────────────────────────────────── -->
+<div id="cursor-glow"></div>
+
+<!-- ── Navigation ─────────────────────────────────────────── -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner container">
+    <a href="index.html" class="nav__brand">DHARUN</a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="user.html">About</a></li>
+    </ul>
+
+    <a href="user.html#contact" class="nav__cta">Contact</a>
+
+    <button class="nav__burger" id="nav-burger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="nav__mobile" id="nav-mobile" role="menu">
+  <a href="index.html" class="active" role="menuitem">Home</a>
+  <a href="work.html" role="menuitem">Work</a>
+  <a href="user.html" role="menuitem">About</a>
+  <a href="user.html#contact" role="menuitem">Contact</a>
+</div>
+
+<!-- ── Hero ───────────────────────────────────────────────── -->
+<main>
+  <section class="hero container" aria-label="Hero">
+
+    <!-- Background SVG accent -->
+    <svg class="hero__bg-accent" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="450" cy="150" r="300" fill="url(#grad0)" />
+      <defs>
+        <radialGradient id="grad0" cx="0" cy="0" r="1"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="translate(450 150) rotate(90) scale(300)">
+          <stop stop-color="#00685f" />
+          <stop offset="1" stop-color="#00685f" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+    </svg>
+
+    <!-- Content -->
+    <div style="display:flex; flex-direction:column; gap: var(--space-md); max-width: 800px;">
+
+      <span class="hero__label section-anim">
+        <span class="material-symbols-outlined" style="font-size:14px;">school</span>
+        Software Engineering Student
+      </span>
+
+      <h1 class="hero__name section-anim" style="animation-delay:0.1s">DHARUN</h1>
+
+      <p class="hero__subtitle section-anim" style="animation-delay:0.15s">
+        Software Engineering Student &middot; Integrated M.Tech @ VIT
+      </p>
+
+      <div class="hero__divider section-anim" style="animation-delay:0.2s"></div>
+
+      <p class="hero__bio section-anim" style="animation-delay:0.25s">
+        I'm an Integrated M.Tech Software Engineering student at Vellore Institute of
+        Technology, currently interning at Emdeon. I enjoy building small projects and
+        learning new technologies along the way.
+      </p>
+
+      <!-- Skill chips -->
+      <div class="hero__chips section-anim" style="animation-delay:0.3s">
+        <span class="chip">Java</span>
+        <span class="chip">Python</span>
+        <span class="chip">SQL</span>
+        <span class="chip">C/C++</span>
+      </div>
+
+      <!-- CTAs -->
+      <div class="hero__ctas section-anim" style="animation-delay:0.35s">
+        <a href="work.html" class="btn btn--primary">
+          View My Work
+          <span class="material-symbols-outlined" style="font-size:18px;">arrow_forward</span>
+        </a>
+        <a href="user.html" class="btn btn--outline">About Me</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Bento Feature Section ──────────────────────────── -->
+  <section class="container" aria-label="Featured work">
+    <div class="bento fade-up">
+
+      <!-- Main project card -->
+      <div class="bento__main card card--lift">
+        <div class="bento__img-wrap">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIeJEnAHl8RHFDrWnvBUyl0TaLLOXYEwmHEcKBSWEV59ybtVFrfBZ0B7tQWUC7eu5CTCXj9jUdUBmyS_kXvQ0dpMzrA0I6i8tNvjlT5obv24Vsn0yU672Kce-uSB8G9mYraU8mnyUSKYJPhf5P_Eg5xrDFxf2QGFS4nWUtzFWKodfW-6Ds8SDji9jpuMo5iXHR0_7gdhrLYEk-5OrtvlzDQKy_KB07Xx3gdrBrZGim6fvGGVj0xZqNLa_oRxCYCcDV_lfs8OW1_b4c"
+            alt="Software engineering workstation with code on display"
+          />
+        </div>
+        <div class="bento__content">
+          <h3 class="project-title">Core Intern Projects @ Emdeon</h3>
+          <p class="text-body-md" style="color: var(--secondary); margin-top: var(--space-xs);">
+            Scalable solutions and technical exploration during my current internship journey.
+          </p>
+          <a href="work.html" class="btn btn--primary" style="margin-top: var(--space-md); padding: var(--space-xs) var(--space-sm); font-size: var(--fs-label-caps);">
+            See All Work
+            <span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Side tiles -->
+      <div class="bento__side">
+        <div class="bento__tile bento__tile--primary fade-up">
+          <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">school</span>
+          <h4>Integrated M.Tech</h4>
+          <p>Academic excellence at VIT University.</p>
+        </div>
+        <div class="bento__tile bento__tile--surface fade-up">
+          <span class="material-symbols-outlined">terminal</span>
+          <h4>Full-Stack Dev</h4>
+          <p>Passionate about clean architecture.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer__inner container">
+    <div>
+      <div class="footer__brand">DHARUN</div>
+      <p class="footer__copy">&copy; 2024 Dharun &middot; Built with precision</p>
+    </div>
+    <nav class="footer__links" aria-label="Footer links">
+      <a href="mailto:ddharun246@gmail.com">Email</a>
+      <a href="https://github.com/ddharun-rgrt" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/dharun-c-a1a8352ab/" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
